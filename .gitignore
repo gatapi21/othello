@@ -1,0 +1,4 @@
+*.suo
+Assets/*.db
+bin
+obj
