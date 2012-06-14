@@ -19,7 +19,7 @@ namespace Othello
             board = new Board(new Size(80, 80), App.SoundElement);            
             player1 = new Player(Common.BLACK, board);
             // player2 = new Player(Common.WHITE, board);
-            player2 = new Strategy(Common.WHITE, 2);
+            player2 = new Strategy(Common.WHITE, 1);
             player1.Over += (s, e) =>
                 {
                     Next(e, player2);

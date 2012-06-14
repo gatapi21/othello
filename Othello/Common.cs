@@ -40,19 +40,16 @@ namespace Othello
             int color = move.Color;
             Debug.Assert(color == Common.BLACK || color == Common.WHITE);
             bool isValidMove = false;
-            if (cells[row][col] != Common.UNDEFINED)
+            if (move.PositionsToFlip.Count > 0)
             {
-                return false;       // cell is already occupied
-            }
-            foreach (var position in move.PositionsToFlip)
-            {               
-                Debug.Assert(cells[position.Row][position.Col] == -color);
-                cells[position.Row][position.Col] = color;
+                Debug.Assert(cells[row][col] == Common.UNDEFINED);
                 isValidMove = true;
-            }
-            if (isValidMove)
-            {
-                cells[row][col] = color;
+                foreach (var position in move.PositionsToFlip)
+                {
+                    Debug.Assert(cells[position.Row][position.Col] == -color);
+                    cells[position.Row][position.Col] = color;                    
+                }
+                cells[row][col] = color;                
             }
             return isValidMove;
         }
