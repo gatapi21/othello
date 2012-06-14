@@ -9,7 +9,6 @@ namespace Othello
 {
     public sealed partial class Pawn : UserControl
     {
-        private MediaElement snd;
         private int color;
         private TaskCompletionSource<bool> tcs;
 
@@ -18,9 +17,9 @@ namespace Othello
             get { return color; }
         }
 
-        public Pawn() : this(Common.UNDEFINED, new Size(73, 73), null) { }
+        public Pawn() : this(Common.UNDEFINED, new Size(73, 73)) { }
 
-        public Pawn(int color, Size size, MediaElement sound)
+        public Pawn(int color, Size size)
         {
             this.InitializeComponent();
             this.color = color;
@@ -28,12 +27,11 @@ namespace Othello
             myEllipse.Width = size.Width;
             myEllipse.Height = size.Height;
             myStoryboard1.Completed += myStoryboard1_Completed;
-            myStoryboard2.Completed += myStoryboard2_Completed;
-            snd = sound;
+            myStoryboard2.Completed += myStoryboard2_Completed;            
         }
 
         void myStoryboard2_Completed(object sender, object e)
-        {
+        {            
             tcs.SetResult(true);
             tcs = null;
         }       
@@ -56,11 +54,6 @@ namespace Othello
             tcs = new TaskCompletionSource<bool>();
             color = -color;
             myStoryboard1.Begin();
-            if (snd != null)
-            {
-                snd.Stop();
-                snd.Play();
-            }
             return tcs.Task;
         }       
     }

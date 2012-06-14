@@ -46,9 +46,9 @@ namespace Othello
             return cells;            
         }
 
-        public Board() : this(new Size(80, 80), null) { }
+        public Board() : this(new Size(80, 80)) { }
 
-        public Board(Size cellSize, MediaElement soundElement)
+        public Board(Size cellSize)
         {
             this.InitializeComponent();
             cellHeight = cellSize.Height;
@@ -72,7 +72,7 @@ namespace Othello
         public void AddPawn(int row, int col, int color)
         {
             Debug.Assert(pawns[row][col] == null);
-            var pawn = new Pawn(color, pawnSize, App.SoundElement);
+            var pawn = new Pawn(color, pawnSize);
             pawns[row][col] = pawn;
             AddUIElement(pawn, row, col);
         }

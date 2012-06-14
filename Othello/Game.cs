@@ -16,7 +16,7 @@ namespace Othello
 
         public Game()
         {
-            board = new Board(new Size(80, 80), App.SoundElement);            
+            board = new Board(new Size(80, 80));            
             player1 = new Player(Common.BLACK, board);
             // player2 = new Player(Common.WHITE, board);
             player2 = new Strategy(Common.WHITE, 1);

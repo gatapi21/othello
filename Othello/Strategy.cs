@@ -51,7 +51,6 @@ namespace Othello
                         Debug.Assert(Common.TryPlay(copy, move));                            
                         // find the best move our opponent can make. Hence, the minus sign.
                         int ss = -Score(copy, 0, -color, depth, pass);
-                        Debug.WriteLine("({0},{1}) {2}", move.Row, move.Col, ss);
                         if (ss > bestscore)
                         {
                             bestscore = ss;

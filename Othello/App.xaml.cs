@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
@@ -13,8 +14,6 @@ namespace Othello
     /// </summary>
     sealed partial class App : Application
     {
-        private static MediaElement sound;
-
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -22,34 +21,10 @@ namespace Othello
         public App()
         {
             this.InitializeComponent();
-            this.Suspending += OnSuspending;
-           // LoadSound();
+            this.Suspending += OnSuspending;           
         }
 
-        public static MediaElement SoundElement
-        {
-            get
-            {
-                if (sound == null)
-                {
-                    sound = new MediaElement { Source = new Uri("ms-appx:/Assets/Clook.mp3") };
-                }
-                return sound;
-            }
-        }
-
-        //private static async void LoadSound()
-        //{
-        //    var package = Windows.ApplicationModel.Package.Current;
-        //    var installedLocation = package.InstalledLocation;
-        //    var storageFile = await installedLocation.GetFileAsync("Assets\\Click_So-S_Bainbr-7969_hifi.mp3");
-        //    if (storageFile != null)
-        //    {
-        //        var stream = await storageFile.OpenAsync(Windows.Storage.FileAccessMode.Read);
-        //        sound = new MediaElement();
-        //        sound.SetSource(stream, storageFile.ContentType);
-        //    }
-        //}
+       
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used when the application is launched to open a specific file, to display
@@ -97,17 +72,6 @@ namespace Othello
             deferral.Complete();
         }
         
-        //private async MediaElement LoadSound()
-        //{
-        //    var package = Windows.ApplicationModel.Package.Current;
-        //    var installedLocation = package.InstalledLocation;
-        //    var storageFile = await installedLocation.GetFileAsync("Assets\\Click_So-S_Bainbr-7969_hifi.mp3");
-        //    if (storageFile != null)
-        //    {
-        //        var stream = await storageFile.OpenAsync(Windows.Storage.FileAccessMode.Read);
-                
-        //        snd.SetSource(stream, storageFile.ContentType);
-        //    }
-        //}
+       
     }
 }
