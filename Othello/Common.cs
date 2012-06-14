@@ -46,8 +46,8 @@ namespace Othello
             }
             foreach (var position in move.PositionsToFlip)
             {               
-                Debug.Assert(cells[position.Row][position.Col] == color);
-                cells[position.Row][position.Col] = -cells[position.Row][position.Col];
+                Debug.Assert(cells[position.Row][position.Col] == -color);
+                cells[position.Row][position.Col] = color;
                 isValidMove = true;
             }
             if (isValidMove)
@@ -83,6 +83,28 @@ namespace Othello
                 }
             }
             return answer;
+        }
+
+        public static int[][] Clone(int[][] x)
+        {
+            var y = new int[x.Length][];
+            for (int i = 0; i < x.Length; i++)
+            {
+                y[i] = new int[x[i].Length];
+                for (int j = 0; j < x[i].Length; j++)
+                {
+                    y[i][j] = x[i][j];
+                }
+            }
+            return y;
+        }
+
+        public static void Assert(bool expression)
+        {
+            if (!expression)
+            {
+                Debugger.Break();
+            }
         }
     }
 }

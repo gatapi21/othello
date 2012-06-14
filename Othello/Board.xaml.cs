@@ -117,10 +117,12 @@ namespace Othello
             {
                 pawns[i] = new Pawn[Board.COLS];
             }
-            AddPawn(3, 3, Common.BLACK);
-            AddPawn(4, 4, Common.BLACK);
-            AddPawn(3, 4, Common.WHITE);
-            AddPawn(4, 3, Common.WHITE);
+            int ci = Board.ROWS / 2;
+            int cj = Board.COLS / 2;
+            AddPawn(ci - 1, cj - 1, Common.WHITE);
+            AddPawn(ci, cj, Common.WHITE);
+            AddPawn(ci - 1, cj, Common.BLACK);
+            AddPawn(ci, cj - 1, Common.BLACK);
         }        
 
         public void AddUIElement(UIElement element, int row, int col)

@@ -30,7 +30,7 @@ namespace Othello
             this.handler = new EventHandler<Position>(board_Click);
         }
 
-        public void Play(IList<Move> moves, int[][] state)
+        public void Play(IList<Move> moves, int[][] state, Move opponentsMove)
         {
             if (!isPlaying)
             {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Othello
@@ -20,28 +21,14 @@ namespace Othello
             new Position { Row = 6, Col = 1},
             new Position { Row = 6, Col = 6}
         };
-        private static Direction[] directions = new Direction[]
-        { 
-            new Direction { X = 1, Y = 0 },
-            new Direction { X = 1, Y = -1},
-            new Direction { X = 0, Y = -1},
-            new Direction { X = -1, Y = -1},
-            new Direction { X = -1, Y = 0},
-            new Direction { X = -1, Y = 1},
-            new Direction { X = 0, Y = 1},
-            new Direction { X = 1, Y = 1}
-        };
-        private int color;
-        private Board board;
+        private int color;        
         private int depth;
-        public Strategy(int color, Board board, int depth)
+
+        public Strategy(int color, int depth)
         {
-            if (depth < 0)
-            {
-                throw new ArgumentException();
-            }
-            this.color = color;
-            this.board = board;
+            Debug.Assert(depth >= 0);
+            Debug.Assert(color == Common.BLACK || color == Common.WHITE);
+            this.color = color;            
             this.depth = depth;
         }
 
@@ -53,30 +40,27 @@ namespace Othello
 			)
 		{
             return Task.Run<Move>(() =>
+            {
+                Move bestMove = null;
+                int bestscore = int.MinValue;
+                if (moves != null)
                 {
-                    Move bestMove = null;
-                    int bestscore = int.MinValue;
-                    bool flag = true;
-                    if (moves != null)
+                    foreach (var move in moves)
                     {
-                        foreach (var move in moves)
+                        var copy = Common.Clone(cells);
+                        Common.Assert(Common.TryPlay(copy, move));                            
+                        // find the best move our opponent can make. Hence, the minus sign.
+                        int ss = -Score(copy, 0, -color, depth, pass);
+                        Debug.WriteLine("({0},{1}) {2}", move.Row, move.Col, ss);
+                        if (ss > bestscore)
                         {
-                            var copy = (int[][])cells.Clone();
-                            if (Common.TryPlay(copy, move))
-                            {
-                                // find the best move our opponent can make. Hence, the minus sign.
-                                int ss = -Score(copy, 0, -color, depth, pass);
-                                if (ss > bestscore || flag)
-                                {
-                                    bestscore = ss;
-                                    bestMove = move;
-                                    flag = false;
-                                }
-                            }
-                        }
+                            bestscore = ss;
+                            bestMove = move;                                    
+                        }                            
                     }
-                    return bestMove;
-                });
+                }
+                return bestMove;
+            });
          }		
 
 		private static int Score(int[][] cells,
@@ -108,23 +92,21 @@ namespace Othello
 				return s;
 			}						
 			int bestScore = int.MinValue;
-			bool firstTime = true;
 			int n = 0; // will store the # of valid moves we can make
 			for(int row = 0; row < Board.ROWS; row++)
 			{
 				for(int col = 0; col < Board.COLS; col++)
 				{                    
-                    var copy = (int[][]) cells.Clone();
+                    var copy = Common.Clone(cells);
                     var move = new Move { Row = row, Col = col, Color = color, PositionsToFlip = Common.GetPositionsToFlip(row, col, color, copy) };
 					if (Common.TryPlay(copy, move))
 					{
 						n++;
 						// find the score our opponent can make.
 						int ss = -Score(copy, d+1, other, depth, false);
-						if (ss > bestScore || firstTime)
+						if (ss > bestScore)
 						{
-							bestScore = ss;
-							firstTime = false;
+							bestScore = ss;							
 						}
 					}
 				}
@@ -177,9 +159,9 @@ namespace Othello
 
         public event EventHandler<Move> Over;
 
-        public async void Play(IList<Move> moves, int[][] state)
+        public async void Play(IList<Move> moves, int[][] state, Move opponentsMove)
         {
-            var move = await FindBestMove(moves, state, color, depth, false);
+            var move = await FindBestMove(moves, state, color, depth, opponentsMove == null);
             RaiseEvent(move);
         }       
 

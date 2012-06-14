@@ -19,7 +19,7 @@ namespace Othello
             board = new Board(new Size(80, 80), App.SoundElement);            
             player1 = new Player(Common.BLACK, board);
             // player2 = new Player(Common.WHITE, board);
-            player2 = new Strategy(Common.WHITE, board, 1);
+            player2 = new Strategy(Common.WHITE, 2);
             player1.Over += (s, e) =>
                 {
                     Next(e, player2);
@@ -48,7 +48,7 @@ namespace Othello
             if (moves.Count > 0 || move != null)
             {
                 AddMarkers(moves.Select(x => new Position { Row = x.Row, Col = x.Col }));
-                other.Play(moves, state);
+                other.Play(moves, state, move);
             }
             else
             {
@@ -58,8 +58,11 @@ namespace Othello
 
         private static async void EndGame()
         {
+            // applying async/await is optional since there is no code 
+            // after the ShowAsync method, but if you omit it,
+            // compiler will issue a warning.
             var dialog = new MessageDialog("GAME OVER");
-            await dialog.ShowAsync();
+            await dialog.ShowAsync();   
         }
 
         private void RemoveMarkers()
