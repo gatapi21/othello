@@ -48,7 +48,7 @@ namespace Othello
             if (moves.Count > 0 || move != null)
             {
                 AddMarkers(moves.Select(x => new Position { Row = x.Row, Col = x.Col }));
-                other.Play(moves, state, move);
+                other.Play(moves, state);
             }
             else
             {

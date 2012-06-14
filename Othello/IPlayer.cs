@@ -21,8 +21,6 @@ namespace Othello
         /// </summary>
         /// <param name="possibleMoves">this is a list of possible moves the player can make</param>
         /// <param name="state">this is the current state of the board</param>
-        /// <param name="opponentsMove">this is the move which the opponent has just played. It is equal to null
-        /// if opponent passed (had no move to play)</param>
-        void Play(IList<Move> possibleMoves, int[][] state, Move opponentsMove);        
+        void Play(IList<Move> possibleMoves, int[][] state);        
     }
 }

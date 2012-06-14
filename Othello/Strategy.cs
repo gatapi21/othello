@@ -35,9 +35,7 @@ namespace Othello
 		private static Task<Move> FindBestMove(IEnumerable<Move> moves,
             int[][] cells,			
 			int color,
-			int depth,
-			bool pass // true means our opponent did not have any move to play; he passed
-			)
+			int depth)
 		{
             return Task.Run<Move>(() =>
             {
@@ -50,7 +48,17 @@ namespace Othello
                         var copy = Common.Clone(cells);
                         Debug.Assert(Common.TryPlay(copy, move));                            
                         // find the best move our opponent can make. Hence, the minus sign.
-                        int ss = -Score(copy, 0, -color, depth, pass);
+                        /* A comment about the last argument in call to Score (set to false below).
+                           When I compare to the code that powers siddjain.com/othello, the last argument
+                           is different. But, I think below matches with what hewgill.com/othello has.
+                           cf. line 342 of hewgill.com/othello
+                           function playerMoveDone2()
+                           {
+                                search(0, 0, 1, document.forms["controls"].Level.value, false, -9000, 9000);
+                            animateMove(BestPos, 1, "playerMoveDone3()");
+                           }
+                        */
+                        int ss = -Score(copy, 0, -color, depth, false);
                         if (ss > bestscore)
                         {
                             bestscore = ss;
@@ -158,9 +166,9 @@ namespace Othello
 
         public event EventHandler<Move> Over;
 
-        public async void Play(IList<Move> moves, int[][] state, Move opponentsMove)
+        public async void Play(IList<Move> moves, int[][] state)
         {
-            var move = await FindBestMove(moves, state, color, depth, opponentsMove == null);
+            var move = await FindBestMove(moves, state, color, depth);
             RaiseEvent(move);
         }       
 
