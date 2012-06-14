@@ -18,7 +18,8 @@ namespace Othello
         {
             board = new Board(new Size(80, 80));            
             player1 = new Player(Common.BLACK, board);
-            // player2 = new Player(Common.WHITE, board);
+            // uncomment for 2 player game 
+            // player2 = new Player(Common.WHITE, board); 
             player2 = new Strategy(Common.WHITE, 1);
             player1.Over += (s, e) =>
                 {
@@ -44,8 +45,8 @@ namespace Othello
                 await board.Flip(move.PositionsToFlip);
             }
             var state = board.State();
-            var moves = GetValidMoves(other, state);
-            if (moves.Count > 0 || move != null)
+            var moves = GetValidMoves(other.Color, state);
+            if (moves.Count > 0 || GetValidMoves(-other.Color, state).Count > 0)
             {
                 AddMarkers(moves.Select(x => new Position { Row = x.Row, Col = x.Col }));
                 other.Play(moves, state);
@@ -84,10 +85,9 @@ namespace Othello
             }
         }
 
-        private IList<Move> GetValidMoves(IPlayer player, int[][] state)
+        private IList<Move> GetValidMoves(int color, int[][] state)
         {
-            var answer = new List<Move>();            
-            var color = player.Color;
+            var answer = new List<Move>();                        
             for(int i = 0; i < Board.ROWS; i++)
 			{
 				for(int j = 0; j < Board.COLS; j++)

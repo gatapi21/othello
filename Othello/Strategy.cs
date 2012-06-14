@@ -47,17 +47,7 @@ namespace Othello
                     {
                         var copy = Common.Clone(cells);
                         Debug.Assert(Common.TryPlay(copy, move));                            
-                        // find the best move our opponent can make. Hence, the minus sign.
-                        /* A comment about the last argument in call to Score (set to false below).
-                           When I compare to the code that powers siddjain.com/othello, the last argument
-                           is different. But, I think below matches with what hewgill.com/othello has.
-                           cf. line 342 of hewgill.com/othello
-                           function playerMoveDone2()
-                           {
-                                search(0, 0, 1, document.forms["controls"].Level.value, false, -9000, 9000);
-                            animateMove(BestPos, 1, "playerMoveDone3()");
-                           }
-                        */
+                        // find the best move our opponent can make. Hence, the minus sign.                        
                         int ss = -Score(copy, 0, -color, depth, false);
                         if (ss > bestscore)
                         {
