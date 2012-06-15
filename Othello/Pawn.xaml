@@ -10,7 +10,7 @@
     d:DesignWidth="400">        
     <UserControl.Resources>
         <Storyboard x:Name="myStoryboard1">
-            <DoubleAnimation
+            <DoubleAnimation x:Name="animation1"
                     EnableDependentAnimation="True"
                         Storyboard.TargetName="myEllipse"
                         Storyboard.TargetProperty="Width"
@@ -19,16 +19,15 @@
                         AutoReverse="False"/>            
         </Storyboard>
         <Storyboard x:Name="myStoryboard2">
-            <DoubleAnimation
+            <DoubleAnimation x:Name="animation2"
                     EnableDependentAnimation="True"
                         Storyboard.TargetName="myEllipse"
                         Storyboard.TargetProperty="Width"
-                        Duration="0:0:0.05"
-                        To="75"
+                        Duration="0:0:0.05"                        
                         AutoReverse="False"/>
         </Storyboard>
     </UserControl.Resources>
-    <Ellipse x:Name="myEllipse" Width="75" Height="75">
+    <Ellipse x:Name="myEllipse">
         <Ellipse.Fill>
             <SolidColorBrush x:Name="myBrush"/>
         </Ellipse.Fill>

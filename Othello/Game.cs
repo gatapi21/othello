@@ -12,11 +12,10 @@ namespace Othello
         private IPlayer player1;
         private IPlayer player2;
         private IList<Marker> markers = new List<Marker>();
-        public Board Board { get { return board; } }
-
-        public Game()
+      
+        public Game(Board board)
         {
-            board = new Board(new Size(80, 80));            
+            this.board = board;            
             player1 = new Player(Common.BLACK, board);
             // uncomment for 2 player game 
             // player2 = new Player(Common.WHITE, board); 

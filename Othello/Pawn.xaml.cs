@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI.Xaml.Controls;
@@ -11,23 +12,35 @@ namespace Othello
     {
         private int color;
         private TaskCompletionSource<bool> tcs;
+        private const int MARGIN = 10;
 
         public int Color
         {
             get { return color; }
         }
 
-        public Pawn() : this(Common.UNDEFINED, new Size(73, 73)) { }
+        public Pawn() : this(Common.UNDEFINED) { }
 
-        public Pawn(int color, Size size)
+        public Pawn(int color)
         {
             this.InitializeComponent();
             this.color = color;
             myBrush.Color = Common.IntToColor(color);
-            myEllipse.Width = size.Width;
-            myEllipse.Height = size.Height;
             myStoryboard1.Completed += myStoryboard1_Completed;
             myStoryboard2.Completed += myStoryboard2_Completed;            
+        }
+
+        protected override Size MeasureOverride(Size availableSize)
+        {
+            double min = Math.Max(Math.Min(availableSize.Width, availableSize.Height) - MARGIN, 1);               
+            if (tcs == null) 
+            {
+                // this code to be executed only when we are not animating the ellipse
+                myEllipse.Width = myEllipse.Height = min;
+                animation1.From = min;
+                animation2.To = min;
+            }
+            return new Size(min, min);
         }
 
         void myStoryboard2_Completed(object sender, object e)

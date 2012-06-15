@@ -9,7 +9,7 @@
     mc:Ignorable="d">
 
     <Grid x:Name="root">
-        <!-- <local:Board x:Name="MyHelloWorldUserControl" /> -->
+        <local:Board x:Name="board" />
         
     </Grid>
 </Page>

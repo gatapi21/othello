@@ -23,9 +23,7 @@ namespace Othello
         public const int ROWS = 8;
         public const int COLS = 8;
         private const int THICKNESS = 3;
-        private double cellWidth = 80;
-        private double cellHeight = 80;
-        private Size pawnSize;
+        private const int MINIMUM_SIZE = 32;
         private Rectangle[][] rectangles;
         private Pawn[][] pawns;
 
@@ -45,19 +43,28 @@ namespace Othello
             }
             return cells;            
         }
-
-        public Board() : this(new Size(80, 80)) { }
-
-        public Board(Size cellSize)
+        
+        public Board()
         {
             this.InitializeComponent();
-            cellHeight = cellSize.Height;
-            cellWidth = cellSize.Width;
-            pawnSize = new Size { Width = cellWidth - 2 * (THICKNESS + 1), Height = cellHeight - 2 * (THICKNESS + 1) };
             AddRowAndColDefinitions();
             CreateCells();
             CreatePawns();
-        }        
+        }
+
+        protected override Size MeasureOverride(Size availableSize)
+        {
+            var min = Math.Max(Math.Min(availableSize.Width, availableSize.Height), MINIMUM_SIZE);            
+            foreach (var rowDefinition in root.RowDefinitions)
+            {
+                rowDefinition.Height = new GridLength(min / Board.ROWS, GridUnitType.Pixel);
+            }
+            foreach (var colDefinition in root.ColumnDefinitions)
+            {
+                colDefinition.Width = new GridLength(min / Board.COLS, GridUnitType.Pixel);
+            }
+            return new Size(min, min);
+        }
 
         public async Task Flip(IEnumerable<Position> positions)
         {
@@ -72,7 +79,7 @@ namespace Othello
         public void AddPawn(int row, int col, int color)
         {
             Debug.Assert(pawns[row][col] == null);
-            var pawn = new Pawn(color, pawnSize);
+            var pawn = new Pawn(color);
             pawns[row][col] = pawn;
             AddUIElement(pawn, row, col);
         }
@@ -81,11 +88,11 @@ namespace Othello
         {
             for (int i = 0; i < ROWS; i++)
             {
-                root.RowDefinitions.Add(new RowDefinition { Height = new GridLength(cellHeight, GridUnitType.Pixel) });
+                root.RowDefinitions.Add(new RowDefinition());
             }
             for (int j = 0; j < COLS; j++)
             {
-                root.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(cellWidth, GridUnitType.Pixel) });
+                root.ColumnDefinitions.Add(new ColumnDefinition());
             }
         }
 

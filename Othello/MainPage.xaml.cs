@@ -28,9 +28,9 @@ namespace Othello
 
         private void NewGame()
         {
+            var game = new Game(board);            
             this.root.Children.Clear();
-            var game = new Game();
-            this.root.Children.Add(game.Board);
+            this.root.Children.Add(board);
             game.Begin();
         }
     }
