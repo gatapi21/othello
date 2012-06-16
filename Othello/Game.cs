@@ -16,13 +16,11 @@ namespace Othello
         public event EventHandler<int[][]> BoardUpdated;
         public event EventHandler GameOver;
 
-        public Game(Board board)
+        public Game(Board board, IPlayer player1, IPlayer player2)
         {
-            this.board = board;            
-            player1 = new Player(Utility.BLACK, board);
-            // uncomment for 2 player game 
-            // player2 = new Player(Common.WHITE, board); 
-            player2 = new Strategy(Utility.WHITE, 1);
+            this.board = board;
+            this.player1 = player1;
+            this.player2 = player2;
             player1.Over += (s, e) =>
                 {
                     Next(e, player2);
@@ -71,7 +69,7 @@ namespace Othello
 
         private async void EndGame()
         {
-            var dialog = new MessageDialog("GAME OVER");
+            var dialog = new MessageDialog("GAME OVER");            
             await dialog.ShowAsync();
             if (GameOver != null)
             {
