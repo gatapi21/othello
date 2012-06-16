@@ -59,8 +59,8 @@ namespace Othello
             {
                 for (int j = 0; j < e[i].Length; j++)
                 {
-                    if (e[i][j] == Common.BLACK) { blackScore++; }
-                    else if (e[i][j] == Common.WHITE) { whiteScore++; } 
+                    if (e[i][j] == Utility.BLACK) { blackScore++; }
+                    else if (e[i][j] == Utility.WHITE) { whiteScore++; } 
                 }
             }
             blackScoreTextBlock.Text = blackScore.ToString();

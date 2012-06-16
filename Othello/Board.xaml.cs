@@ -38,7 +38,7 @@ namespace Othello
                 for (int j = 0; j < cells[i].Length; j++)
                 {
                     var pawn = pawns[i][j];
-                    cells[i][j] = pawn == null ? Common.UNDEFINED : pawn.Color; 
+                    cells[i][j] = pawn == null ? Utility.UNDEFINED : pawn.Color; 
                 }
             }
             return cells;            
@@ -126,10 +126,10 @@ namespace Othello
             }
             int ci = Board.ROWS / 2;
             int cj = Board.COLS / 2;
-            AddPawn(ci - 1, cj - 1, Common.WHITE);
-            AddPawn(ci, cj, Common.WHITE);
-            AddPawn(ci - 1, cj, Common.BLACK);
-            AddPawn(ci, cj - 1, Common.BLACK);
+            AddPawn(ci - 1, cj - 1, Utility.WHITE);
+            AddPawn(ci, cj, Utility.WHITE);
+            AddPawn(ci - 1, cj, Utility.BLACK);
+            AddPawn(ci, cj - 1, Utility.BLACK);
         }        
 
         public void AddUIElement(UIElement element, int row, int col)

@@ -109,7 +109,7 @@
     <Compile Include="Board.xaml.cs">
       <DependentUpon>Board.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Common.cs" />
+    <Compile Include="Utility.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="IPlayer.cs" />

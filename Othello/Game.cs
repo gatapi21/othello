@@ -19,10 +19,10 @@ namespace Othello
         public Game(Board board)
         {
             this.board = board;            
-            player1 = new Player(Common.BLACK, board);
+            player1 = new Player(Utility.BLACK, board);
             // uncomment for 2 player game 
             // player2 = new Player(Common.WHITE, board); 
-            player2 = new Strategy(Common.WHITE, 1);
+            player2 = new Strategy(Utility.WHITE, 1);
             player1.Over += (s, e) =>
                 {
                     Next(e, player2);
@@ -105,9 +105,9 @@ namespace Othello
 			{
 				for(int j = 0; j < Board.COLS; j++)
 				{
-					if (state[i][j] == Common.UNDEFINED)
+					if (state[i][j] == Utility.UNDEFINED)
 					{
-                        var positions = Common.GetPositionsToFlip(i, j, color, state);
+                        var positions = Utility.GetPositionsToFlip(i, j, color, state);
                         if (positions.Count > 0)
                         {
                             answer.Add(new Move { Row = i, Col = j, Color = color, PositionsToFlip = positions });

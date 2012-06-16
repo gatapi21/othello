@@ -27,7 +27,7 @@ namespace Othello
         public Strategy(int color, int depth)
         {
             Debug.Assert(depth >= 0);
-            Debug.Assert(color == Common.BLACK || color == Common.WHITE);
+            Debug.Assert(color == Utility.BLACK || color == Utility.WHITE);
             this.color = color;            
             this.depth = depth;
         }
@@ -45,8 +45,8 @@ namespace Othello
                 {
                     foreach (var move in moves)
                     {
-                        var copy = Common.Clone(cells);
-                        Debug.Assert(Common.TryPlay(copy, move));                            
+                        var copy = Utility.Clone(cells);
+                        Debug.Assert(Utility.TryPlay(copy, move));                            
                         // find the best move our opponent can make. Hence, the minus sign.                        
                         int ss = -Score(copy, 0, -color, depth, false);
                         if (ss > bestscore)
@@ -94,9 +94,9 @@ namespace Othello
 			{
 				for(int col = 0; col < Board.COLS; col++)
 				{                    
-                    var copy = Common.Clone(cells);
-                    var move = new Move { Row = row, Col = col, Color = color, PositionsToFlip = Common.GetPositionsToFlip(row, col, color, copy) };
-					if (Common.TryPlay(copy, move))
+                    var copy = Utility.Clone(cells);
+                    var move = new Move { Row = row, Col = col, Color = color, PositionsToFlip = Utility.GetPositionsToFlip(row, col, color, copy) };
+					if (Utility.TryPlay(copy, move))
 					{
 						n++;
 						// find the score our opponent can make.
