@@ -12,7 +12,10 @@ namespace Othello
         private IPlayer player1;
         private IPlayer player2;
         private IList<Marker> markers = new List<Marker>();
-      
+
+        public event EventHandler<int[][]> BoardUpdated;
+        public event EventHandler GameOver;
+
         public Game(Board board)
         {
             this.board = board;            
@@ -28,12 +31,15 @@ namespace Othello
                 {
                     Next(e, player1);
                 };
+            ShowMarkers = true;
         }
                         
         public void Begin()
         {
             Next(null, player1);            
         }
+
+        public bool ShowMarkers { get; set; }
 
         private async void Next(Move move, IPlayer other)
         {
@@ -44,10 +50,17 @@ namespace Othello
                 await board.Flip(move.PositionsToFlip);
             }
             var state = board.State();
+            if (BoardUpdated != null)
+            {
+                BoardUpdated(this, state);
+            }
             var moves = GetValidMoves(other.Color, state);
             if (moves.Count > 0 || GetValidMoves(-other.Color, state).Count > 0)
             {
-                AddMarkers(moves.Select(x => new Position { Row = x.Row, Col = x.Col }));
+                if (ShowMarkers)
+                {
+                    AddMarkers(moves.Select(x => new Position { Row = x.Row, Col = x.Col }));
+                }
                 other.Play(moves, state);
             }
             else
@@ -56,13 +69,14 @@ namespace Othello
             }
         }
 
-        private static async void EndGame()
+        private async void EndGame()
         {
-            // applying async/await is optional since there is no code 
-            // after the ShowAsync method, but if you omit it,
-            // compiler will issue a warning.
             var dialog = new MessageDialog("GAME OVER");
-            await dialog.ShowAsync();   
+            await dialog.ShowAsync();
+            if (GameOver != null)
+            {
+                GameOver(this, new EventArgs());
+            }
         }
 
         private void RemoveMarkers()
