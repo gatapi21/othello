@@ -11,11 +11,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Page.Resources>
-
-        <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">My Application</x:String>
-    </Page.Resources>
+    
 
     <!--
         This grid acts as a root panel for the page that defines two rows:
@@ -29,14 +25,38 @@
         </Grid.RowDefinitions>
 
         <!-- Back button and page title -->
+        <!-- Back button and page title -->
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
-            <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
+            <TextBlock x:Name="pageTitle" Grid.Column="1" Text="Credits" Style="{StaticResource PageHeaderTextStyle}"/>
         </Grid>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
+            <TextBlock HorizontalAlignment="Center" 
+                       TextWrapping="Wrap"
+                       Text="Developed By Siddharth Jain"
+                       Style="{StaticResource PageHeaderTextStyle}"
+                       VerticalAlignment="Center"
+                       />
+            <TextBlock HorizontalAlignment="Center" 
+                       TextWrapping="Wrap"
+                       Text="siddjain@live.com"
+                       Style="{StaticResource PageHeaderTextStyle}"
+                       VerticalAlignment="Center"
+                       />
+            <TextBlock HorizontalAlignment="Center" 
+                       TextWrapping="Wrap"
+                       Text="http://www.siddjain.com"
+                       Style="{StaticResource PageHeaderTextStyle}"
+                       VerticalAlignment="Center"
+                       />
+        </StackPanel>
+
+        <!-- Back button and page title -->
 
         <VisualStateManager.VisualStateGroups>
 

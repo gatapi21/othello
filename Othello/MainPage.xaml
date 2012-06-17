@@ -21,6 +21,6 @@
         <Button Grid.Row="2" HorizontalAlignment="Center" Content="One Player Game" Click="Button_Click_1"  />
         <Button Grid.Row="3" HorizontalAlignment="Center" Content="Two Player Game" Click="Button_Click_2"/>
         <Button Grid.Row="4" HorizontalAlignment="Center" Content="Rules"/>
-        <Button Grid.Row="5" HorizontalAlignment="Center" Content="Credits"/>
+        <Button Grid.Row="5" HorizontalAlignment="Center" Content="Credits" Click="Button_Click_3"/>
     </Grid>
 </Page>
