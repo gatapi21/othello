@@ -20,8 +20,10 @@
                    Padding="0,40,0,0"/>
             <local:Board HorizontalAlignment="Center" Grid.Row="1"/>
             <TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"
-                       Style="{StaticResource BodyTextStyle}"
+                       FontSize="20"
                        FontStyle="Italic"
+                       TextWrapping="Wrap"
+                       Margin="5,20,0,0"
                        Text="The game that takes a minute to learn, but a lifetime to master" />
         </Grid>
     
