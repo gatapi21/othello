@@ -154,6 +154,7 @@
     <Content Include="Assets\Click_So-S_Bainbr-7969_hifi.mp3" />
     <Content Include="Assets\Clook.mp3" />
     <Content Include="Assets\Logo.png" />
+    <Content Include="Assets\rules.txt" />
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />

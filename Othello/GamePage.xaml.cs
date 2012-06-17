@@ -72,6 +72,10 @@ namespace Othello
             time.Text = string.Format("{0:00}:{1:00}:{2:00}", offset.Hours, offset.Minutes, offset.Seconds);
         }
 
+        internal Board Board { get { return this.board; } }
+
+        internal Button PassButton { get { return this.passButton; } }
+
         /// <summary>
         /// Populates the page with content passed during navigation.  Any saved state is also
         /// provided when recreating a page from a prior session.
@@ -86,7 +90,7 @@ namespace Othello
             if (pageState == null)
             {
                 int? difficulty = navigationParameter as int?;
-                IPlayer player1 = new Player(Utility.BLACK, this.board);
+                IPlayer player1 = new Player(Utility.BLACK, this);
                 IPlayer player2 = null;
                 if (difficulty != null && difficulty.Value >= 0 && difficulty.Value <= 2)
                 {
@@ -94,7 +98,7 @@ namespace Othello
                 }
                 else
                 {
-                    player2 = new Player(Utility.WHITE, this.board);
+                    player2 = new Player(Utility.WHITE, this);
                 }
                 NewGame(player1, player2);
             }

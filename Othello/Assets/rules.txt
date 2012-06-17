@@ -1,0 +1,7 @@
+﻿If you are new to this game, try playing a single player game against the computer. It will be easier to learn the game, and get acquainted with the rules that way, rather than trying to learn the game by reading the rules.
+
+In a nutshell, this is a game played between two players - black and white. At start, each player gets two discs of his/her color. Then in each turn, the number of black and white discs on the board will continuously change, as players attempt to convert discs to their own color. At end of the game, the player with greater number of discs will be the winner.
+
+How to play a turn: you can place a disc of your own color, in one of the cells marked as available. If no cell is available to play, you must pass your turn and yield to the other player.
+
+Tip: The corner cells are especially important. Try to play so as to limit the number of moves available to your opponent, and occupy the corner cells.

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Othello
 {
@@ -7,8 +9,10 @@ namespace Othello
     {
         private int color;
         private Board board;
+        private Button passButton;
         public event EventHandler<Move> Over;
         private EventHandler<Position> handler;
+        private RoutedEventHandler passButtonClickHandler;
         private bool isPlaying;
         private IList<Move> moves;
         public int Color
@@ -19,24 +23,46 @@ namespace Othello
             }            
         }
 
-        public Player(int color, Board board)
+        public Player(int color, GamePage page)
         {
             if (color != 1 && color != -1)
             {
                 throw new ArgumentException();
             }
-            this.board = board;
+            this.board = page.Board;
+            this.passButton = page.PassButton;
             this.color = color;
             this.handler = new EventHandler<Position>(board_Click);
+            this.passButtonClickHandler = new RoutedEventHandler(passButton_Click);
         }
 
         public void Play(IList<Move> moves, int[][] state)
         {
             if (!isPlaying)
             {
-                this.moves = moves;
-                board.Click += handler;
+                if (moves != null && moves.Count > 0)
+                {
+                    this.moves = moves;
+                    board.Click += handler;
+                }
+                else
+                {
+                    this.passButton.Visibility = Visibility.Visible;
+                    this.passButton.IsEnabled = true;
+                    this.passButton.Click += passButtonClickHandler;
+                }
                 isPlaying = true;
+            }
+        }
+
+        void passButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.passButton.Click -= passButtonClickHandler;
+            this.passButton.Visibility = Visibility.Collapsed;
+            isPlaying = false;
+            if (Over != null)
+            {
+                Over(this, null);
             }
         }
 

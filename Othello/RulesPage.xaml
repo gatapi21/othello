@@ -9,13 +9,7 @@
     xmlns:common="using:Othello.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
-
-    <Page.Resources>
-
-        <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">My Application</x:String>
-    </Page.Resources>
+    mc:Ignorable="d">    
 
     <!--
         This grid acts as a root panel for the page that defines two rows:
@@ -35,9 +29,17 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
-            <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
+            <TextBlock x:Name="pageTitle" Grid.Column="1" Text="Rules" Style="{StaticResource PageHeaderTextStyle}"/>
         </Grid>
-
+        <ScrollViewer Grid.Row="1">
+            <ScrollViewer.Content>
+                <TextBlock 
+                   x:Name="rulesTextBlock"
+                   Padding="60,20,60,20"
+                   Style="{StaticResource BodyTextStyle}" FontSize="24" IsHitTestVisible="False" LineHeight="36"/>        
+            </ScrollViewer.Content>
+        </ScrollViewer>
+        
         <VisualStateManager.VisualStateGroups>
 
             <!-- Visual states reflect the application's view state -->

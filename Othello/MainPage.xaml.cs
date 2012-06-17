@@ -30,6 +30,11 @@ namespace Othello
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(CreditsPage));
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(RulesPage));
         }                
     }
 }

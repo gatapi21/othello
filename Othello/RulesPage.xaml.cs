@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -21,11 +23,35 @@ namespace Othello
     /// </summary>
     public sealed partial class RulesPage : Othello.Common.LayoutAwarePage
     {
+        private static string rules;
+
+        private static async Task<string> RulesAsync()
+        {
+            if (rules == null)
+            {
+                var storageFile = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync("Assets\\rules.txt");
+                if (storageFile != null)
+                {
+                    using (var stream = await storageFile.OpenAsync(Windows.Storage.FileAccessMode.Read))
+                    {
+                        var reader = new StreamReader(stream.AsStreamForRead());
+                        rules = await reader.ReadToEndAsync();
+                    }                  
+                }
+            }
+            return rules;
+        }
+
         public RulesPage()
         {
             this.InitializeComponent();
+            Init();
         }
 
+        public async void Init()
+        {
+            this.rulesTextBlock.Text = await RulesAsync();
+        }
         /// <summary>
         /// Populates the page with content passed during navigation.  Any saved state is also
         /// provided when recreating a page from a prior session.
