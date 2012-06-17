@@ -1,4 +1,5 @@
 ﻿using System;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -14,8 +15,12 @@ namespace Othello
     {            
         public MainPage()
         {
-            this.InitializeComponent();
-        }
+            this.InitializeComponent();            
+            this.SizeChanged += (s, e) =>
+            { 
+                Utility.SetView(this.filledView, this.filledView, this.filledView, this.snapView);
+            };
+        }        
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {

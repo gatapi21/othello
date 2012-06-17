@@ -16,13 +16,14 @@
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">My Application</x:String>
     </Page.Resources>
-
+    <Grid>
+        <local:SnapView x:Name="snapView" />
     <!--
         This grid acts as a root panel for the page that defines two rows:
         * Row 0 contains the back button and page title
         * Row 1 contains the rest of the page layout
     -->
-    <Grid Style="{StaticResource LayoutRootStyle}">
+    <Grid x:Name="unsnappedView" Style="{StaticResource LayoutRootStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
@@ -102,5 +103,6 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         
+    </Grid>
     </Grid>
 </common:LayoutAwarePage>

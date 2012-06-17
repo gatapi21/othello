@@ -127,6 +127,9 @@
     <Compile Include="RulesPage.xaml.cs">
       <DependentUpon>RulesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SnapView.xaml.cs">
+      <DependentUpon>SnapView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utility.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="Game.cs" />
@@ -158,6 +161,10 @@
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
+    <Page Include="SnapView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ChooseDifficultyPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -24,6 +24,10 @@ namespace Othello
         public CreditsPage()
         {
             this.InitializeComponent();
+            this.SizeChanged += (s, e) =>
+            {
+                Utility.SetView(this.unsnappedView, this.unsnappedView, this.unsnappedView, this.snapView);
+            };
         }
 
         /// <summary>

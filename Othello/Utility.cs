@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using Windows.UI;
+using Windows.UI.ViewManagement;
+using Windows.UI.Xaml;
 
 namespace Othello
 {
@@ -21,6 +23,39 @@ namespace Othello
             new Direction { X = 0, Y = 1},
             new Direction { X = 1, Y = 1}
         };
+        
+        public static void SetView(UIElement landscape, UIElement portrait, UIElement filled, UIElement snapped)
+        {            
+            switch (ApplicationView.Value)
+            {
+                case ApplicationViewState.Filled:
+                    landscape.Visibility = Visibility.Collapsed;
+                    portrait.Visibility = Visibility.Collapsed;
+                    snapped.Visibility = Visibility.Collapsed;
+                    filled.Visibility = Visibility.Visible;
+                    break;
+                case ApplicationViewState.FullScreenLandscape:
+                    portrait.Visibility = Visibility.Collapsed;
+                    snapped.Visibility = Visibility.Collapsed;
+                    filled.Visibility = Visibility.Collapsed;
+                    landscape.Visibility = Visibility.Visible;
+                    break;
+                case ApplicationViewState.FullScreenPortrait:
+                    landscape.Visibility = Visibility.Collapsed;
+                    snapped.Visibility = Visibility.Collapsed;
+                    filled.Visibility = Visibility.Collapsed;
+                    portrait.Visibility = Visibility.Visible;
+                    break;
+                case ApplicationViewState.Snapped:
+                    portrait.Visibility = Visibility.Collapsed;
+                    landscape.Visibility = Visibility.Collapsed;
+                    filled.Visibility = Visibility.Collapsed;
+                    snapped.Visibility = Visibility.Visible;
+                    break;
+                default:
+                    break;
+            }
+        }
 
         public static Color IntToColor(int color)
         {

@@ -24,7 +24,11 @@ namespace Othello
         public ChooseDifficultyPage()
         {
             this.InitializeComponent();
-        }
+            this.SizeChanged += (s, e) =>
+            {
+                Utility.SetView(this.filledView, this.filledView, this.filledView, this.snapView);
+            };
+        }        
 
         /// <summary>
         /// Populates the page with content passed during navigation.  Any saved state is also

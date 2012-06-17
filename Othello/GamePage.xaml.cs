@@ -29,7 +29,11 @@ namespace Othello
 
         public GamePage()
         {
-            this.InitializeComponent();            
+            this.InitializeComponent();
+            this.SizeChanged += (s, e) =>
+            {
+                Utility.SetView(this.unsnappedView, this.unsnappedView, this.unsnappedView, this.snapView);
+            };
             tickHandler = new EventHandler<object>(dispatcherTimer_Tick);
             boardUpdatedHandler = new EventHandler<int[][]>(game_BoardUpdated);
             gameOverHandler = new EventHandler(game_GameOver);

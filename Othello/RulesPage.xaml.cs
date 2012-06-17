@@ -45,6 +45,10 @@ namespace Othello
         public RulesPage()
         {
             this.InitializeComponent();
+            this.SizeChanged += (s, e) =>
+            {
+                Utility.SetView(this.unsnappedView, this.unsnappedView, this.unsnappedView, this.snapView);
+            };
             Init();
         }
 

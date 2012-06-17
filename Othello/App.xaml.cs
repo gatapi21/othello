@@ -21,7 +21,7 @@ namespace Othello
         public App()
         {
             this.InitializeComponent();
-            this.Suspending += OnSuspending;           
+            this.Suspending += OnSuspending;                       
         }
 
        
