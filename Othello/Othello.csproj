@@ -156,11 +156,11 @@
   <ItemGroup>
     <Content Include="Assets\Click_So-S_Bainbr-7969_hifi.mp3" />
     <Content Include="Assets\Clook.mp3" />
-    <Content Include="Assets\Logo.png" />
+    <Content Include="Assets\logo_150x150.png" />
+    <Content Include="Assets\logo_30x30.png" />
+    <Content Include="Assets\logo_50x50.png" />
     <Content Include="Assets\rules.txt" />
-    <Content Include="Assets\SmallLogo.png" />
-    <Content Include="Assets\SplashScreen.png" />
-    <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\splash_620x300.png" />
     <Page Include="SnapView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
