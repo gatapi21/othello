@@ -20,16 +20,16 @@ namespace Othello
             { 
                 Utility.SetView(this.filledView, this.filledView, this.filledView, this.snapView);
             };
-        }        
+        }       
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
+        {            
             this.Frame.Navigate(typeof(ChooseDifficultyPage));
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(GamePage));
+            this.Frame.Navigate(typeof(GamePage), new GameState { GameMode = GameMode.TwoPlayer });
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)

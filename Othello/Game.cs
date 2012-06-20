@@ -12,8 +12,11 @@ namespace Othello
         private IPlayer player1;
         private IPlayer player2;
         private IList<Marker> markers = new List<Marker>();
-
-        public event EventHandler<int[][]> BoardUpdated;
+        /// <summary>
+        /// This event is raised just before a player plays his turn. It reflects the current state of the board,
+        /// and the player who is about to play. This information will be need to be persisted in case the app is suspended
+        /// </summary>
+        public event EventHandler<GameUpdateArgs> Update;
         public event EventHandler GameOver;
 
         public Game(Board board, IPlayer player1, IPlayer player2)
@@ -32,14 +35,14 @@ namespace Othello
             ShowMarkers = true;
         }
                         
-        public void Begin()
+        public void Begin(IPlayer player)
         {
-            Next(null, player1);            
+            Next(null, player);            
         }
 
         public bool ShowMarkers { get; set; }
 
-        private async void Next(Move move, IPlayer other)
+        private async void Next(Move move, IPlayer player)
         {
             RemoveMarkers();
             if (move != null)
@@ -48,18 +51,18 @@ namespace Othello
                 await board.Flip(move.PositionsToFlip);
             }
             var state = board.State();
-            if (BoardUpdated != null)
+            if (Update != null)
             {
-                BoardUpdated(this, state);
+                Update(this, new GameUpdateArgs { Cells = state, Player = player });
             }
-            var moves = GetValidMoves(other.Color, state);
-            if (moves.Count > 0 || GetValidMoves(-other.Color, state).Count > 0)
+            var moves = GetValidMoves(player.Color, state);
+            if (moves.Count > 0 || GetValidMoves(-player.Color, state).Count > 0)
             {
                 if (ShowMarkers)
                 {
                     AddMarkers(moves.Select(x => new Position { Row = x.Row, Col = x.Col }));
                 }
-                other.Play(moves, state);
+                player.Play(moves, state);
             }
             else
             {

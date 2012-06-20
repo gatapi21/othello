@@ -24,10 +24,55 @@ namespace Othello
         public const int COLS = 8;
         private const int THICKNESS = 3;
         private const int MINIMUM_SIZE = 32;
+        private static int[][] _default;
         private Rectangle[][] rectangles;
         private Pawn[][] pawns;
 
         public event EventHandler<Position> Click;
+
+        private static int[][] defaultState
+        {
+            get
+            {
+                if (_default == null)
+                {
+                    var mid = Board.ROWS / 2 - 1;
+                    _default = new int[Board.ROWS][];
+                    for (int i = 0; i < Board.ROWS; i++)
+                    {
+                        _default[i] = new int[Board.COLS];
+                        for (int j = 0; j < Board.COLS; j++)
+                        {
+                            var color = Utility.UNDEFINED;
+                            if (i == mid)
+                            {
+                                if (j == i)
+                                {
+                                    color = Utility.WHITE;
+                                }
+                                else if (j == i + 1)
+                                {
+                                    color = Utility.BLACK;
+                                }                                
+                            }
+                            else if (i == mid + 1)
+                            {
+                                if (j == i - 1)
+                                {
+                                    color = Utility.BLACK;
+                                }
+                                else if (j == i)
+                                {
+                                    color = Utility.WHITE;
+                                }                                
+                            }                                                       
+                           _default[i][j] = color;                            
+                        }
+                    }
+                }
+                return _default;
+            }            
+        }
 
         public int[][] State()
         {
@@ -44,14 +89,25 @@ namespace Othello
             return cells;            
         }
         
-        public Board()
+        internal Board(int[][] state)
         {
             this.InitializeComponent();
             AddRowAndColDefinitions();
             CreateCells();
-            CreatePawns();
+            if (state == null)
+            {
+                CreatePawns(defaultState);
+            }
+            else
+            {
+                CreatePawns(state);
+            }
         }
 
+        public Board() : this(null)
+        {            
+        }
+       
         protected override Size MeasureOverride(Size availableSize)
         {
             var min = Math.Max(Math.Min(availableSize.Width, availableSize.Height), MINIMUM_SIZE);            
@@ -116,21 +172,23 @@ namespace Othello
                 }
             }
         }
-
-        private void CreatePawns()
+        
+        private void CreatePawns(int[][] state)
         {
             pawns = new Pawn[Board.ROWS][];
             for (int i = 0; i < Board.ROWS; i++)
             {
                 pawns[i] = new Pawn[Board.COLS];
+                for (int j = 0; j < Board.COLS; j++)
+                {
+                    var color = state[i][j];
+                    if (color != Utility.UNDEFINED)
+                    {
+                        AddPawn(i, j, color);
+                    }
+                }
             }
-            int ci = Board.ROWS / 2;
-            int cj = Board.COLS / 2;
-            AddPawn(ci - 1, cj - 1, Utility.WHITE);
-            AddPawn(ci, cj, Utility.WHITE);
-            AddPawn(ci - 1, cj, Utility.BLACK);
-            AddPawn(ci, cj - 1, Utility.BLACK);
-        }        
+        }
 
         public void AddUIElement(UIElement element, int row, int col)
         {

@@ -55,17 +55,22 @@ namespace Othello
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(GamePage), 0);
+            StartGame(0);
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(GamePage), 1);
+            StartGame(1);
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(GamePage), 2);
-        }        
+            StartGame(2);
+        }
+
+        private void StartGame(int difficulty)
+        {
+            this.Frame.Navigate(typeof(GamePage), new GameState { GameMode = GameMode.OnePlayer, Difficulty = difficulty });
+        }
     }
 }

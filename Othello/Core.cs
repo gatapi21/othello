@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Othello
 {
@@ -20,5 +21,11 @@ namespace Othello
         public int Col { get; set; }
         public int Color { get; set; }
         public List<Position> PositionsToFlip { get; set; }
+    }
+
+    internal class GameUpdateArgs : EventArgs
+    {
+        public IPlayer Player { get; set; }
+        public int[][] Cells { get; set; }
     }
 }
