@@ -65,7 +65,7 @@
                         <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,10" HorizontalAlignment="Right" Style="{StaticResource HeaderTextStyle}" Text="10" x:Name="blackScoreTextBlock"  />
                         <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,10" HorizontalAlignment="Right" Style="{StaticResource HeaderTextStyle}" Text="White:" />
                         <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,10" HorizontalAlignment="Right" Style="{StaticResource HeaderTextStyle}" Text="20" x:Name="whiteScoreTextBlock"  />
-                        <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,10" HorizontalAlignment="Right" Style="{StaticResource HeaderTextStyle}" Text="Difficulty:" Visibility="Collapsed" x:Name="difficultyLabel"/>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,10" HorizontalAlignment="Right" Style="{StaticResource HeaderTextStyle}" Text="Level:" Visibility="Collapsed" x:Name="difficultyLabel"/>
                         <TextBlock Grid.Row="2" Grid.Column="1" Margin="0,10" HorizontalAlignment="Right" Style="{StaticResource HeaderTextStyle}" Text="Medium" Visibility="Collapsed" x:Name="difficultyValue" />
                     </Grid>
                     <Button x:Name="passButton" Content="Pass" Visibility="Collapsed"/>

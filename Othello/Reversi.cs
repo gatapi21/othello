@@ -23,6 +23,21 @@ namespace Othello
             new Direction { X = 0, Y = 1},
             new Direction { X = 1, Y = 1}
         };
+
+        public static string DifficultyToString(int difficulty)
+        {
+            switch (difficulty)
+            {
+                case 0:
+                    return "Easy";                    
+                case 1:
+                    return "Medium";
+                case 2:
+                    return "Hard";
+                default:
+                    return null;
+            }
+        }
         
         public static void SetView(UIElement landscape, UIElement portrait, UIElement filled, UIElement snapped)
         {            

@@ -146,6 +146,9 @@ namespace Othello
             {
                 int difficulty = Math.Max(0, Math.Min(state.Difficulty, 2));            
                 player2 = new Strategy(Reversi.WHITE, difficulty);
+                this.difficultyLabel.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                this.difficultyValue.Text = Reversi.DifficultyToString(difficulty);
+                this.difficultyValue.Visibility = Windows.UI.Xaml.Visibility.Visible;
             }
             else
             {
