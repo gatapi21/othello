@@ -43,27 +43,27 @@ namespace Othello
                         _default[i] = new int[Board.COLS];
                         for (int j = 0; j < Board.COLS; j++)
                         {
-                            var color = Utility.UNDEFINED;
+                            var color = Reversi.UNDEFINED;
                             if (i == mid)
                             {
                                 if (j == i)
                                 {
-                                    color = Utility.WHITE;
+                                    color = Reversi.WHITE;
                                 }
                                 else if (j == i + 1)
                                 {
-                                    color = Utility.BLACK;
+                                    color = Reversi.BLACK;
                                 }                                
                             }
                             else if (i == mid + 1)
                             {
                                 if (j == i - 1)
                                 {
-                                    color = Utility.BLACK;
+                                    color = Reversi.BLACK;
                                 }
                                 else if (j == i)
                                 {
-                                    color = Utility.WHITE;
+                                    color = Reversi.WHITE;
                                 }                                
                             }                                                       
                            _default[i][j] = color;                            
@@ -83,7 +83,7 @@ namespace Othello
                 for (int j = 0; j < cells[i].Length; j++)
                 {
                     var pawn = pawns[i][j];
-                    cells[i][j] = pawn == null ? Utility.UNDEFINED : pawn.Color; 
+                    cells[i][j] = pawn == null ? Reversi.UNDEFINED : pawn.Color; 
                 }
             }
             return cells;            
@@ -182,7 +182,7 @@ namespace Othello
                 for (int j = 0; j < Board.COLS; j++)
                 {
                     var color = state[i][j];
-                    if (color != Utility.UNDEFINED)
+                    if (color != Reversi.UNDEFINED)
                     {
                         AddPawn(i, j, color);
                     }

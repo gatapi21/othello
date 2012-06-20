@@ -18,7 +18,7 @@ namespace Othello
             this.InitializeComponent();            
             this.SizeChanged += (s, e) =>
             { 
-                Utility.SetView(this.filledView, this.filledView, this.filledView, this.snapView);
+                Reversi.SetView(this.filledView, this.filledView, this.filledView, this.snapView);
             };
         }       
 

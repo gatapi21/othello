@@ -6,7 +6,7 @@ using Windows.UI.Xaml;
 
 namespace Othello
 {
-    internal static class Utility
+    internal static class Reversi
     {
         public const int UNDEFINED = 0;
         public const int BLACK = -1;
@@ -59,8 +59,8 @@ namespace Othello
 
         public static Color IntToColor(int color)
         {
-            if (color == Utility.BLACK) { return Colors.Black; }
-            else if (color == Utility.WHITE) { return Colors.White; }
+            if (color == Reversi.BLACK) { return Colors.Black; }
+            else if (color == Reversi.WHITE) { return Colors.White; }
             else 
             {
                 return Colors.Red;
@@ -73,11 +73,11 @@ namespace Othello
             int row = move.Row;
             int col = move.Col;
             int color = move.Color;
-            Debug.Assert(color == Utility.BLACK || color == Utility.WHITE);
+            Debug.Assert(color == Reversi.BLACK || color == Reversi.WHITE);
             bool isValidMove = false;
             if (move.PositionsToFlip.Count > 0)
             {
-                Debug.Assert(cells[row][col] == Utility.UNDEFINED);
+                Debug.Assert(cells[row][col] == Reversi.UNDEFINED);
                 isValidMove = true;
                 foreach (var position in move.PositionsToFlip)
                 {
@@ -93,7 +93,7 @@ namespace Othello
         {
             var answer = new List<Position>();
             var opposite = -color;
-            if (cells[row][col] == Utility.UNDEFINED)
+            if (cells[row][col] == Reversi.UNDEFINED)
             {
                 // test each direction	
                 for (int k = 0; k < directions.Length; k++)

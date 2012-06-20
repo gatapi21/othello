@@ -106,9 +106,9 @@ namespace Othello
 			{
 				for(int j = 0; j < Board.COLS; j++)
 				{
-					if (state[i][j] == Utility.UNDEFINED)
+					if (state[i][j] == Reversi.UNDEFINED)
 					{
-                        var positions = Utility.GetPositionsToFlip(i, j, color, state);
+                        var positions = Reversi.GetPositionsToFlip(i, j, color, state);
                         if (positions.Count > 0)
                         {
                             answer.Add(new Move { Row = i, Col = j, Color = color, PositionsToFlip = positions });

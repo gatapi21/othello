@@ -19,13 +19,13 @@ namespace Othello
             get { return color; }
         }
 
-        public Pawn() : this(Utility.UNDEFINED) { }
+        public Pawn() : this(Reversi.UNDEFINED) { }
 
         public Pawn(int color)
         {
             this.InitializeComponent();
             this.color = color;
-            myBrush.Color = Utility.IntToColor(color);
+            myBrush.Color = Reversi.IntToColor(color);
             myStoryboard1.Completed += myStoryboard1_Completed;
             myStoryboard2.Completed += myStoryboard2_Completed;            
         }

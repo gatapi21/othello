@@ -66,7 +66,7 @@ namespace Othello
             this.InitializeComponent();
             this.SizeChanged += (s, e) =>
             {
-                Utility.SetView(this.unsnappedView, this.unsnappedView, this.unsnappedView, this.snapView);
+                Reversi.SetView(this.unsnappedView, this.unsnappedView, this.unsnappedView, this.snapView);
             };
             tickHandler = new EventHandler<object>(dispatcherTimer_Tick);
             boardUpdatedHandler = new EventHandler<GameUpdateArgs>(game_BoardUpdated);
@@ -88,8 +88,8 @@ namespace Othello
             {
                 for (int j = 0; j < cells[i].Length; j++)
                 {
-                    if (cells[i][j] == Utility.BLACK) { blackScore++; }
-                    else if (cells[i][j] == Utility.WHITE) { whiteScore++; }
+                    if (cells[i][j] == Reversi.BLACK) { blackScore++; }
+                    else if (cells[i][j] == Reversi.WHITE) { whiteScore++; }
                 }
             }
             blackScoreTextBlock.Text = blackScore.ToString();
@@ -140,16 +140,16 @@ namespace Othello
             board.SetValue(Grid.RowProperty, 0);
             board.SetValue(Grid.ColumnProperty, 0);
             this.root.Children.Add(board);
-            IPlayer player1 = new Player(Utility.BLACK, this);
+            IPlayer player1 = new Player(Reversi.BLACK, this);
             IPlayer player2 = null;
             if (state.GameMode == GameMode.OnePlayer)
             {
                 int difficulty = Math.Max(0, Math.Min(state.Difficulty, 2));            
-                player2 = new Strategy(Utility.WHITE, difficulty);
+                player2 = new Strategy(Reversi.WHITE, difficulty);
             }
             else
             {
-                player2 = new Player(Utility.WHITE, this);
+                player2 = new Player(Reversi.WHITE, this);
             }
             if (state.TimeStamp == null)
             {
@@ -160,7 +160,7 @@ namespace Othello
             var game = new Game(board, player1, player2);
             game.Update += boardUpdatedHandler;
             game.GameOver += gameOverHandler;
-            game.Begin(state.Player != Utility.WHITE ? player1 : player2);            
+            game.Begin(state.Player != Reversi.WHITE ? player1 : player2);            
         }
 
         private void backButton_Click_1(object sender, RoutedEventArgs e)
