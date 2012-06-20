@@ -15,9 +15,9 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Othello.App">
-      <VisualElements DisplayName="Othello" Logo="Assets\logo_150x150.png" SmallLogo="Assets\logo_30x30.png" Description="Othello" ForegroundText="dark" BackgroundColor="#00aa00">
+      <VisualElements DisplayName="Othello" Logo="Assets\logo_150x150.png" SmallLogo="Assets\logo_30x30.png" Description="Othello" ForegroundText="light" BackgroundColor="#00aa00">
         <DefaultTile ShowName="allLogos" ShortName="Othello" />
-        <SplashScreen Image="Assets\splash_620x300.png" BackgroundColor="#00aa00" />
+        <SplashScreen Image="Assets\splash_620x300.png" BackgroundColor="#000000" />
       </VisualElements>
     </Application>
   </Applications>
