@@ -38,10 +38,16 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
-                <TextBlock x:Name="pageTitle" Grid.Column="1" Text="Choose Difficulty" Style="{StaticResource PageHeaderTextStyle}"/>
+                <TextBlock x:Name="pageTitle" Grid.Column="1" Text="Choose Level" Style="{StaticResource PageHeaderTextStyle}"/>
             </Grid>
 
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Row="1">
+                <StackPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="0,40,0,0"/>
+                        <Setter Property="FontSize" Value="30" />
+                    </Style>
+                </StackPanel.Resources>                
                 <Button Content="Easy" Click="Button_Click_1"   />
                 <Button Content="Medium" Click="Button_Click_2"/>
                 <Button Content="Hard" Click="Button_Click_3" />
