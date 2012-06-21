@@ -1,8 +1,7 @@
-﻿using System;
+﻿/* note this class has no references to Windows.UI. all the UI code is in GamePage.xaml.cs */
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Windows.Foundation;
-using Windows.UI.Popups;
 
 namespace Othello
 {
@@ -70,10 +69,8 @@ namespace Othello
             }
         }
 
-        private async void EndGame()
-        {
-            var dialog = new MessageDialog("GAME OVER");            
-            await dialog.ShowAsync();
+        private void EndGame()
+        {           
             if (GameOver != null)
             {
                 GameOver(this, new EventArgs());

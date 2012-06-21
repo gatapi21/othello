@@ -46,7 +46,7 @@ namespace Othello
                     foreach (var move in moves)
                     {
                         var copy = Reversi.Clone(cells);
-                        Debug.Assert(Reversi.TryPlay(copy, move));                            
+                        Reversi.TryPlay(copy, move);
                         // find the best move our opponent can make. Hence, the minus sign.                        
                         int ss = -Score(copy, 0, -color, depth, false);
                         if (ss > bestscore)
